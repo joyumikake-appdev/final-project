@@ -1,44 +1,36 @@
 Rails.application.routes.draw do
 
-  
+  get("/", { :controller => "users", :action => "index" })
+  get("/users", { :controller => "users", :action => "index" })
 
-  # Routes for the Parenting resource:
+  #------------------------------  
 
-  # CREATE
-  post("/insert_parenting", { :controller => "parentings", :action => "create" })
-          
-  # READ
-  get("/parentings", { :controller => "parentings", :action => "index" })
+  # SIGN IN FORM
+  get("/user_sign_in", { :controller => "user_sessions", :action => "new_session_form" })
+  # AUTHENTICATE AND STORE COOKIE
+  post("/user_verify_credentials", { :controller => "user_sessions", :action => "create_cookie" })
   
-  get("/parentings/:path_id", { :controller => "parentings", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_parenting/:path_id", { :controller => "parentings", :action => "update" })
-  
-  # DELETE
-  get("/delete_parenting/:path_id", { :controller => "parentings", :action => "destroy" })
-
+  # SIGN OUT        
+  get("/user_sign_out", { :controller => "user_sessions", :action => "destroy_cookies" })
+             
   #------------------------------
 
-  # Routes for the Comment resource:
+  # Routes for the User account:
 
-  # CREATE
-  post("/insert_comment", { :controller => "comments", :action => "create" })
-          
-  # READ
-  get("/comments", { :controller => "comments", :action => "index" })
+  # SIGN UP FORM
+  get("/user_sign_up", { :controller => "users", :action => "new_registration_form" })        
+  # CREATE RECORD
+  post("/insert_user", { :controller => "users", :action => "create"  })
+      
+  # EDIT PROFILE FORM        
+  get("/edit_user_profile", { :controller => "users", :action => "edit_registration_form" })       
+  # UPDATE RECORD
+  post("/modify_user", { :controller => "users", :action => "update" })
   
-  get("/comments/:path_id", { :controller => "comments", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_comment/:path_id", { :controller => "comments", :action => "update" })
-  
-  # DELETE
-  get("/delete_comment/:path_id", { :controller => "comments", :action => "destroy" })
+  # DELETE RECORD
+  get("/cancel_user_account", { :controller => "users", :action => "destroy" })
 
-  #------------------------------
+  # ------------------------------
 
   # Routes for the Study resource:
 
@@ -59,31 +51,42 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  # Routes for the User account:
+  # Routes for the Comment resource:
 
-  # SIGN UP FORM
-  get("/user_sign_up", { :controller => "users", :action => "new_registration_form" })        
-  # CREATE RECORD
-  post("/insert_user", { :controller => "users", :action => "create"  })
-      
-  # EDIT PROFILE FORM        
-  get("/edit_user_profile", { :controller => "users", :action => "edit_registration_form" })       
-  # UPDATE RECORD
-  post("/modify_user", { :controller => "users", :action => "update" })
+  # CREATE
+  post("/insert_comment", { :controller => "comments", :action => "create" })
+          
+  # READ
+  get("/comments", { :controller => "comments", :action => "index" })
   
-  # DELETE RECORD
-  get("/cancel_user_account", { :controller => "users", :action => "destroy" })
-
-  # ------------------------------
-
-  # SIGN IN FORM
-  get("/user_sign_in", { :controller => "user_sessions", :action => "new_session_form" })
-  # AUTHENTICATE AND STORE COOKIE
-  post("/user_verify_credentials", { :controller => "user_sessions", :action => "create_cookie" })
+  get("/comments/:path_id", { :controller => "comments", :action => "show" })
   
-  # SIGN OUT        
-  get("/user_sign_out", { :controller => "user_sessions", :action => "destroy_cookies" })
-             
+  # UPDATE
+  
+  post("/modify_comment/:path_id", { :controller => "comments", :action => "update" })
+  
+  # DELETE
+  get("/delete_comment/:path_id", { :controller => "comments", :action => "destroy" })
+
+  #------------------------------  
+
+  # Routes for the Parenting resource:
+
+  # CREATE
+  post("/insert_parenting", { :controller => "parentings", :action => "create" })
+          
+  # READ
+  get("/parentings", { :controller => "parentings", :action => "index" })
+  
+  get("/parentings/:path_id", { :controller => "parentings", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_parenting/:path_id", { :controller => "parentings", :action => "update" })
+  
+  # DELETE
+  get("/delete_parenting/:path_id", { :controller => "parentings", :action => "destroy" })
+
   #------------------------------
 
   # ======= Add Your Routes Above These =============
