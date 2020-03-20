@@ -1,0 +1,88 @@
+
+<h1>Hi, <%= @current_user.user_name.capitalize %> </h1>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Add a new study
+    </h2>
+
+    <form action="/insert_study" method="post">
+      <div class="form-group">
+        <label for="day_box">
+          Day
+        </label>
+
+        <input type="date" id="day_box" name="query_day" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="english_box">
+          English
+        </label>
+
+        <input type="text" id="english_box" name="query_english" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="japanese_box">
+          Japanese
+        </label>
+
+        <input type="text" id="japanese_box" name="query_japanese" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="math_box">
+          Math
+        </label>
+
+        <input type="text" id="math_box" name="query_math" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="science_box">
+          Science
+        </label>
+
+        <input type="text" id="science_box" name="query_science" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="social_study_box">
+          Social study
+        </label>
+
+        <input type="text" id="social_study_box" name="query_social_study" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="other_study_box">
+          Other study
+        </label>
+
+        <input type="text" id="other_study_box" name="query_other_study" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="game_box">
+          Game
+        </label>
+
+        <input type="text" id="game_box" name="query_game" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="diary_box">
+          Diary
+        </label>
+
+        <textarea id="diary_box" name="query_diary" class="form-control" rows="3"></textarea>
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Create study
+      </button>
+    </form>
+  </div>
+</div>

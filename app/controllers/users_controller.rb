@@ -6,6 +6,13 @@ class UsersController < ApplicationController
     render ({ :template => "users/index.html.erb"})
   end
 
+  def user_details
+    the_username = params.fetch("detail_username")
+    @user = User.where({ :user_name => the_username}).at(0)
+    @own_studies = @user.own_studies
+    render ({ :template => "users/user_details.html.erb"})
+  end
+
   def new_registration_form
     render({ :template => "user_sessions/sign_up.html.erb" })
   end
@@ -17,7 +24,6 @@ class UsersController < ApplicationController
     @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.user_name = params.fetch("query_user_name")
     @user.is_parent = params.fetch("query_is_parent", false)
-    @user.total_points = params.fetch("query_total_points")
 
     save_status = @user.save
 

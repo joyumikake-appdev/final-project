@@ -8,13 +8,17 @@ class StudiesController < ApplicationController
   def show
     the_id = params.fetch("path_id")
     @study = Study.where({:id => the_id }).at(0)
-
+    @comments = Comment.where({:study_id => the_id})
     render({ :template => "studies/show.html.erb" })
+  end
+
+  def report
+    render({ :template => "studies/report.html.erb" })
   end
 
   def create
     @study = Study.new
-    @study.user_id = params.fetch("query_user_id")
+    @study.user_id = @current_user.id
     @study.day = params.fetch("query_day")
     @study.english = params.fetch("query_english")
     @study.japanese = params.fetch("query_japanese")
@@ -24,7 +28,6 @@ class StudiesController < ApplicationController
     @study.other_study = params.fetch("query_other_study")
     @study.game = params.fetch("query_game")
     @study.diary = params.fetch("query_diary")
-    @study.point = params.fetch("query_point")
 
     if @study.valid?
       @study.save

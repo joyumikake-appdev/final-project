@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get("/", { :controller => "users", :action => "index" })
   get("/users", { :controller => "users", :action => "index" })
+  get("/users/:detail_username", { :controller => "users", :action => "user_details" } )
 
   #------------------------------  
 
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
   # Routes for the Study resource:
 
   # CREATE
+  get("/report_study", { :controller => "studies", :action => "report" })
   post("/insert_study", { :controller => "studies", :action => "create" })
           
   # READ
@@ -54,7 +56,7 @@ Rails.application.routes.draw do
   # Routes for the Comment resource:
 
   # CREATE
-  post("/insert_comment", { :controller => "comments", :action => "create" })
+  get("/insert_comment", { :controller => "comments", :action => "create" })
           
   # READ
   get("/comments", { :controller => "comments", :action => "index" })

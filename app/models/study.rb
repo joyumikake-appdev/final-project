@@ -19,4 +19,7 @@
 #
 
 class Study < ApplicationRecord
+  def learner
+    return User.where({ :id => self.user_id }).at(0)
+  end
 end

@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
     
     if user != nil
       are_they_legit = user.authenticate(the_supplied_password)
-    
+  
       if are_they_legit == false
         redirect_to("/user_sign_in", { :alert => "Incorrect password." })
       else

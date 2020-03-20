@@ -14,13 +14,13 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new
-    @comment.body = params.fetch("query_body")
-    @comment.author_id = params.fetch("query_author_id")
-    @comment.study_id = params.fetch("query_study_id")
+    @comment.body = params.fetch("input_body")
+    @comment.author_id = @current_user.id
+    @comment.study_id = params.fetch("input_study_id")
 
     if @comment.valid?
       @comment.save
-      redirect_to("/comments", { :notice => "Comment created successfully." })
+      redirect_to("/studies/#{@comment.study_id}", { :notice => "Comment created successfully." })
     else
       redirect_to("/comments", { :notice => "Comment failed to create successfully." })
     end
