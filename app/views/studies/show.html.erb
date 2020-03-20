@@ -1,0 +1,221 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Study #<%= @study.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/studies" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_study/<%= @study.id %>" class="btn btn-block btn-outline-secondary">
+          Delete study
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @study.user_id %>
+      </dd>
+
+      <dt>
+        Day
+      </dt>
+      <dd>
+        <%= @study.day %>
+      </dd>
+
+      <dt>
+        English
+      </dt>
+      <dd>
+        <%= @study.english %>
+      </dd>
+
+      <dt>
+        Japanese
+      </dt>
+      <dd>
+        <%= @study.japanese %>
+      </dd>
+
+      <dt>
+        Math
+      </dt>
+      <dd>
+        <%= @study.math %>
+      </dd>
+
+      <dt>
+        Science
+      </dt>
+      <dd>
+        <%= @study.science %>
+      </dd>
+
+      <dt>
+        Social study
+      </dt>
+      <dd>
+        <%= @study.social_study %>
+      </dd>
+
+      <dt>
+        Other study
+      </dt>
+      <dd>
+        <%= @study.other_study %>
+      </dd>
+
+      <dt>
+        Game
+      </dt>
+      <dd>
+        <%= @study.game %>
+      </dd>
+
+      <dt>
+        Diary
+      </dt>
+      <dd>
+        <%= @study.diary %>
+      </dd>
+
+      <dt>
+        Point
+      </dt>
+      <dd>
+        <%= @study.point %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@study.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@study.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit study
+    </h2>
+
+    <form action="/modify_study/<%= @study.id %>"  method="post" >
+      <div class="form-group">
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" class="form-control" value="<%= @study.user_id %>">
+      </div>
+
+      <div class="form-group">
+        <label for="day_box">
+          Day
+        </label>
+
+        <input type="date" id="day_box" name="query_day" class="form-control" value="<%= @study.day %>">
+      </div>
+
+      <div class="form-group">
+        <label for="english_box">
+          English
+        </label>
+
+        <input type="text" id="english_box" name="query_english" class="form-control" value="<%= @study.english %>">
+      </div>
+
+      <div class="form-group">
+        <label for="japanese_box">
+          Japanese
+        </label>
+
+        <input type="text" id="japanese_box" name="query_japanese" class="form-control" value="<%= @study.japanese %>">
+      </div>
+
+      <div class="form-group">
+        <label for="math_box">
+          Math
+        </label>
+
+        <input type="text" id="math_box" name="query_math" class="form-control" value="<%= @study.math %>">
+      </div>
+
+      <div class="form-group">
+        <label for="science_box">
+          Science
+        </label>
+
+        <input type="text" id="science_box" name="query_science" class="form-control" value="<%= @study.science %>">
+      </div>
+
+      <div class="form-group">
+        <label for="social_study_box">
+          Social study
+        </label>
+
+        <input type="text" id="social_study_box" name="query_social_study" class="form-control" value="<%= @study.social_study %>">
+      </div>
+
+      <div class="form-group">
+        <label for="other_study_box">
+          Other study
+        </label>
+
+        <input type="text" id="other_study_box" name="query_other_study" class="form-control" value="<%= @study.other_study %>">
+      </div>
+
+      <div class="form-group">
+        <label for="game_box">
+          Game
+        </label>
+
+        <input type="text" id="game_box" name="query_game" class="form-control" value="<%= @study.game %>">
+      </div>
+
+      <div class="form-group">
+        <label for="diary_box">
+          Diary
+        </label>
+
+        <textarea id="diary_box" name="query_diary" class="form-control" rows="3"><%= @study.diary %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="point_box">
+          Point
+        </label>
+
+        <input type="text" id="point_box" name="query_point" class="form-control" value="<%= @study.point %>">
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Update study
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
