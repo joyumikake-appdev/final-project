@@ -1,37 +1,73 @@
-<h1><%= @user.user_name %></h1>
+<h1>
+  <%= @user.user_name.capitalize %>
 
-<h2>Own studies </h2>
-
-<table border="1">
-  <tr>
-    <th>User</th>
-    <th>Day</th>
-    <th>Diary</th>
-    <th>Study Time</th>
-    <th>Game Time</th>
-    <th>Points Earned</th>
-    <th>English</th>
-    <th>Japanese</th>
-    <th>Math</th>
-    <th>Science</th>
-    <th>Social Studies</th>
-    <th>Other Studies</th>
-  </tr>
-
-  <% @own_studies.each do |a_own_study|%>
-    <tr>
-      <td><%= a_own_study.learner.user_name %></td>
-      <td><%= a_own_study.day %></td>
-      <td><%= a_own_study.diary %></td>
-      <td><%= a_own_study.english + a_own_study.japanese + a_own_study.math + a_own_study.science + a_own_study.social_study + a_own_study.other_study %></td>
-      <td><%= a_own_study.game %></td>
-      <td><%= a_own_study.english + a_own_study.japanese + a_own_study.math + a_own_study.science + a_own_study.social_study + a_own_study.other_study - a_own_study.game * 4 %></td>
-      <td><%= a_own_study.english %></td>      
-      <td><%= a_own_study.japanese %></td>
-      <td><%= a_own_study.math %></td>
-      <td><%= a_own_study.science %></td>
-      <td><%= a_own_study.social_study %></td>
-      <td><%= a_own_study.other_study %></td>
-    </tr>
+  <% if  @user.is_parent %>
+    [status: parent] 
+  <% else %>
+    [status: kid]
   <% end %>
-</table>
+</h1>
+
+<% if  @user.is_parent %>
+  <h2>Own kids</h2>
+
+  <table border="1">
+    <tr>
+      <th>User</th>
+      <th></th>
+    </tr>
+    <% @kids.each do |a_kid|%>
+    <tr>
+      <td><%= a_kid.user_name %></td>
+      <td><a href = "/users/<%= a_kid.user_name %>">Show details</a></td>
+    </tr>
+    <% end %>
+  </table>
+
+<% else %>
+  <h2>Own studies </h2>
+
+  <table border="1">
+    <tr>
+      <th>User</th>
+      <th>Day</th>
+      <th>Diary</th>
+      <th>Study Time</th>
+      <th>Game Time</th>
+      <th>Points Earned</th>
+      <th>English</th>
+      <th>Japanese</th>
+      <th>Math</th>
+      <th>Science</th>
+      <th>Social Studies</th>
+      <th>Other Studies</th>
+    </tr>
+
+    <% @own_studies.each do |a_own_study|%>
+      <tr>
+        <td><%= a_own_study.learner.user_name %></td>
+        <td><%= a_own_study.day %></td>
+        <td><%= a_own_study.diary %></td>
+        <td><%= a_own_study.english + a_own_study.japanese + a_own_study.math + a_own_study.science + a_own_study.social_study + a_own_study.other_study %></td>
+        <td><%= a_own_study.game %></td>
+        <td><%= a_own_study.english + a_own_study.japanese + a_own_study.math + a_own_study.science + a_own_study.social_study + a_own_study.other_study - a_own_study.game * 4 %></td>
+        <td><%= a_own_study.english %></td>      
+        <td><%= a_own_study.japanese %></td>
+        <td><%= a_own_study.math %></td>
+        <td><%= a_own_study.science %></td>
+        <td><%= a_own_study.social_study %></td>
+        <td><%= a_own_study.other_study %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <form action="/insert_parenting">
+    <label for="browser_kid_id">Kid ID</label>
+    <input id="browser_kid_id" type="text" value="<%= @user.id %>" name="input_kid_id">
+
+    <label for="browser_parent_id">Parent ID</label>
+    <input id="browser_parent_id" type="text" value="<%= @current_user.id %>" name="input_parent_id">
+
+    <button>I'm his/her parent!</button>
+  </form>
+<% end %>

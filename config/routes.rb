@@ -75,7 +75,7 @@ Rails.application.routes.draw do
   # Routes for the Parenting resource:
 
   # CREATE
-  post("/insert_parenting", { :controller => "parentings", :action => "create" })
+  get("/insert_parenting", { :controller => "parentings", :action => "create" })
           
   # READ
   get("/parentings", { :controller => "parentings", :action => "index" })

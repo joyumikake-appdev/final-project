@@ -14,14 +14,15 @@ class ParentingsController < ApplicationController
 
   def create
     @parenting = Parenting.new
-    @parenting.kid_id = params.fetch("query_kid_id")
-    @parenting.parent_id = params.fetch("query_parent_id")
-
+    
+    @parenting.kid_id = params.fetch(:input_kid_id)
+    @parenting.parent_id = params.fetch(:input_parent_id)
+    
     if @parenting.valid?
       @parenting.save
-      redirect_to("/parentings", { :notice => "Parenting created successfully." })
+      redirect_to("/", { :notice => "Parenting created successfully." })
     else
-      redirect_to("/parentings", { :notice => "Parenting failed to create successfully." })
+      redirect_to("/", { :notice => "Parenting failed to create successfully." })
     end
   end
 

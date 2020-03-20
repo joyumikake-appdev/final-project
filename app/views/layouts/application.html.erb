@@ -16,6 +16,9 @@
   </head>
 
   <body>
+    <% if @current_user%>
+    <h1>Hi! <%= @current_user.user_name %></h1>
+    <% end %>
     <nav>
       <ul>
         <li>
@@ -23,13 +26,19 @@
         </li>
         <li>
           <a href="/studies">Studies</a>
-        </li>   
-        <li>
-          <a href="/report_study">Report Today's Study</a>
         </li>
-        <li>
-          <a href="/user_sign_out">Sign Out</a>
-        </li>
+        <% if @current_user%>
+          <% if @current_user.is_parent != true %>   
+            <li>
+              <a href="/report_study">Report Today's Study</a>
+            </li>
+          <% end %>
+        <% end %>
+        <% if @current_user %>
+          <li>
+            <a href="/user_sign_out">Sign Out</a>
+          </li>
+        <% end %>
        </ul>
     </nav>
 
