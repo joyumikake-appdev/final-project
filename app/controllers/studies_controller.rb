@@ -28,7 +28,8 @@ class StudiesController < ApplicationController
     @study.other_study = params.fetch("query_other_study")
     @study.game = params.fetch("query_game")
     @study.diary = params.fetch("query_diary")
-
+    @study.point = (@study.english + @study.japanese + @study.math + @study.science + @study.social_study + @study.other_study)/4 - @study.game
+    
     if @study.valid?
       @study.save
       redirect_to("/studies", { :notice => "Study created successfully." })
@@ -51,8 +52,8 @@ class StudiesController < ApplicationController
     @study.other_study = params.fetch("query_other_study")
     @study.game = params.fetch("query_game")
     @study.diary = params.fetch("query_diary")
-    @study.point = params.fetch("query_point")
-
+    @study.point = (@study.english + @study.japanese + @study.math + @study.science + @study.social_study + @study.other_study)/4 - @study.game
+    
     if @study.valid?
       @study.save
       redirect_to("/studies/#{@study.id}", { :notice => "Study updated successfully."} )

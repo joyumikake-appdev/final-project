@@ -20,4 +20,8 @@ class User < ApplicationRecord
   def own_studies
     return Study.where({ :user_id => self.id })
   end
+
+  def points
+    return Study.where({:user_id => self.id }).sum("point")
+  end
 end
