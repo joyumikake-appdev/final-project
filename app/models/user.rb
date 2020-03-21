@@ -17,6 +17,9 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
 
+  validates :user_name, :presence => true
+  validates :user_name, :uniqueness => true
+
   def own_studies
     return Study.where({ :user_id => self.id })
   end

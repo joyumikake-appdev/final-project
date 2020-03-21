@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FinalProject</title>
+    <title>Kids Study Log</title>
     <%= csrf_meta_tags %>
 
     <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
@@ -26,37 +26,49 @@
   </head>
 
   <body>
+    <h1 style="color: green">Kids Study Log</h1>
+
     <% if @current_user%>
-    <h1>Hi! <%= @current_user.user_name %></h1>
+    <h1>Hi! <%= @current_user.user_name.capitalize %></h1>
     <% end %>
-    <nav>
+    <nav class="navbar-nav">
       <ul>
-        <li>
-          <a href="/users">Users</a>
-        </li>
-        <li>
-          <a href="/studies">Studies</a>
-        </li>
         <% if @current_user %>
-          <li>
+          <li class="nav-item">
+            <a href="/users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a href="/studies">Studies</a>
+          </li>
+          <li class="nav-item">
             <a href="/users/<%= @current_user.user_name %>">My Page</a>
           </li>
         <% end %>
         <% if @current_user %>
           <% if @current_user.is_parent != true %>   
-            <li>
+            <li class="nav-item">
               <a href="/report_study">Report Today's Study</a>
             </li>
           <% end %>
         <% end %>
         <% if @current_user %>
-          <li>
+          <li class="nav-item">
             <a href="/user_sign_out">Sign Out</a>
           </li>
         <% end %>
        </ul>
     </nav>
 
+    <div class="alert alert-danger" role="alert">
+      <%= alert %>
+    </div>
+
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+
+
     <%= yield %>
+
   </body>
 </html>

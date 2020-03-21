@@ -67,13 +67,18 @@
     <% end %>
   </table>
 
+  <% if @current_user.is_parent %>
   <form action="/insert_parenting">
-    <label for="browser_kid_id">Kid ID</label>
-    <input id="browser_kid_id" type="text" value="<%= @user.id %>" name="input_kid_id">
-
-    <label for="browser_parent_id">Parent ID</label>
-    <input id="browser_parent_id" type="text" value="<%= @current_user.id %>" name="input_parent_id">
+    <input type="hidden" value="<%= @user.id %>" name="input_kid_id">
+    <input type="hidden" value="<%= @current_user.id %>" name="input_parent_id">
 
     <button>I'm his/her parent!</button>
+  </form>
+  <% end %>
+<% end %>
+
+<% if @current_user.id == @user.id %>
+  <form action="/cancel_user_account">
+    <button>Delete my user account!</button>
   </form>
 <% end %>
