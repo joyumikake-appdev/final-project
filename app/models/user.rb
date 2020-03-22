@@ -20,6 +20,11 @@ class User < ApplicationRecord
   validates :user_name, :presence => true
   validates :user_name, :uniqueness => true
 
+  has_many :study_records, :class_name => "Study", :dependent => :destroy
+  has_many :messages, :class_name => "Comment", :foreign_key => "author_id", :dependent => :destroy
+  has_many :parents, :class_name => "Parenting", :foreign_key => "kid_id", :dependent => :destroy
+  has_many :kids, :class_name => "Parenting", :foreign_key => "parent_id", :dependent => :destroy
+
   def own_studies
     return Study.where({ :user_id => self.id })
   end
