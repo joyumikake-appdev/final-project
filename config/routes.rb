@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   post("/modify_user", { :controller => "users", :action => "update" })
   
   # DELETE FORM
-  get("/cancel_user_account", { :controller => "users", :action => "cancel" })
+  get("/cancel_user_account/:detail_username", { :controller => "users", :action => "cancel" })
 
   # DELETE RECORD
   get("/destory_user_account", { :controller => "users", :action => "destroy" })
@@ -59,7 +59,8 @@ Rails.application.routes.draw do
   # Routes for the Comment resource:
 
   # CREATE
-  get("/insert_comment", { :controller => "comments", :action => "create" })
+  get("/insert_comment_from_studypage", { :controller => "comments", :action => "create_from_studypage" })
+  get("/insert_comment_from_userpage", { :controller => "comments", :action => "create_from_userpage" })
           
   # READ
   get("/comments", { :controller => "comments", :action => "index" })

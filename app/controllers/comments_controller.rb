@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     render({ :template => "comments/show.html.erb" })
   end
 
-  def create
+  def create_from_studypage
     @comment = Comment.new
     @comment.body = params.fetch("input_body")
     @comment.author_id = @current_user.id
@@ -22,7 +22,21 @@ class CommentsController < ApplicationController
       @comment.save
       redirect_to("/studies/#{@comment.study_id}", { :notice => "Comment created successfully." })
     else
-      redirect_to("/comments", { :notice => "Comment failed to create successfully." })
+      redirect_to("/studies/#{@comment.study_id}", { :notice => "Comment failed to create successfully." })
+    end
+  end
+
+  def create_from_userpage
+    @comment = Comment.new
+    @comment.body = params.fetch("input_body")
+    @comment.author_id = @current_user.id
+    @comment.study_id = params.fetch("input_study_id")
+
+    if @comment.valid?
+      @comment.save
+      redirect_to("/users/#{@comment.commented.user_name}", { :notice => "Comment created successfully." })
+    else
+      redirect_to("/users/#{@comment.commented.user_name}", { :notice => "Comment failed to create successfully." })
     end
   end
 

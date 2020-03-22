@@ -23,7 +23,7 @@
 
 <hr>
 
-<% if  @user.is_parent %>
+<% if @user.is_parent %>
   <h2>Own kids</h2>
 
   <table border="1">
@@ -49,6 +49,7 @@
   <table border="1">
     <tr>
       <th>User</th>
+      <th>Study ID</th>
       <th>Day</th>
       <th>Diary</th>
       <th>Study Time</th>
@@ -60,11 +61,14 @@
       <th>Science</th>
       <th>Social Studies</th>
       <th>Other Studies</th>
+      <th>Detail</th>
+      <th>Comment</th>
     </tr>
 
     <% @own_studies.each do |a_own_study|%>
       <tr>
         <td><%= a_own_study.learner.user_name %></td>
+        <td><%= a_own_study.id %></td>
         <td><%= a_own_study.day %></td>
         <td><%= a_own_study.diary %></td>
         <td><%= a_own_study.english + a_own_study.japanese + a_own_study.math + a_own_study.science + a_own_study.social_study + a_own_study.other_study %></td>
@@ -76,8 +80,13 @@
         <td><%= a_own_study.science %></td>
         <td><%= a_own_study.social_study %></td>
         <td><%= a_own_study.other_study %></td>
-        <td><a href="/studies/<%= a_own_study.id %>">Show details
-          </a>
+        <td><a href="/studies/<%= a_own_study.id %>">Show details</a></td>
+        <td>
+          <form action="/insert_comment_from_userpage">
+            <input type="hidden" value="<%= a_own_study.id %>" name="input_study_id">
+            <textarea name="input_body" placeholder="Enter a comment..."></textarea>
+            <button>Add comment</button>
+          </form>
         </td>
       </tr>
     <% end %>
@@ -90,6 +99,7 @@
   <h2>Comments</h2>
   <table>
     <tr>
+      <th>Study ID</th>
       <th>Commenter</th>
       <th>Comment</th>
       <th>Posted</th>
@@ -97,6 +107,7 @@
 
     <% @own_comments.each do |a_comment| %>
     <tr>
+      <td><%= a_comment.study_id %></td>
       <td><%= a_comment.commenter.user_name %></td>
       <td><%= a_comment.body %></td>
       <td><%= a_comment.created_at %></td>
