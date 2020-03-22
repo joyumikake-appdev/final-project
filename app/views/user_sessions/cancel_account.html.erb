@@ -1,0 +1,17 @@
+
+<form action="/destory_user_account">
+  <div>
+    <h1 style="color: red">Are you sure?</h1>
+    <button>Yes, I wanna delete my user account!</button>
+  </div>
+</form>
+
+<form action="/users/<%= @current_user.user_name %>">
+  <div>
+    <button>No, I don't want to delete my user account!</button>
+  </div>
+</form>
+
+
+<hr>
+

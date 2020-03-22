@@ -3,7 +3,7 @@
     <h1>
         <%= @user.user_name %>
 
-        <% if  @user.is_parent %>
+        <% if @user.is_parent %>
           (parent) 
         <% else %>
           (kid)
@@ -11,6 +11,17 @@
     </h1>
   </div>
 </div>
+
+<% if @user.is_parent == FALSE && @current_user.is_parent %>
+  <form action="/insert_parenting">
+    <input type="hidden" value="<%= @user.id %>" name="input_kid_id">
+    <input type="hidden" value="<%= @current_user.id %>" name="input_parent_id">
+
+    <button>I'm his/her parent!</button>
+  </form>
+<% end %>
+
+<hr>
 
 <% if  @user.is_parent %>
   <h2>Own kids</h2>
@@ -29,7 +40,9 @@
   </table>
 
 <% else %>
-  <p>You can play video games up to <%= @user.points %> minutes!</p>
+  <p><%= @user.user_name.capitalize %> can play video games up to <%= @user.points %> minutes!</p>
+
+  <hr>
 
   <h2>Own studies </h2>
 
@@ -63,18 +76,33 @@
         <td><%= a_own_study.science %></td>
         <td><%= a_own_study.social_study %></td>
         <td><%= a_own_study.other_study %></td>
+        <td><a href="/studies/<%= a_own_study.id %>">Show details
+          </a>
+        </td>
       </tr>
     <% end %>
   </table>
+<% end %>
 
-  <% if @current_user.is_parent %>
-  <form action="/insert_parenting">
-    <input type="hidden" value="<%= @user.id %>" name="input_kid_id">
-    <input type="hidden" value="<%= @current_user.id %>" name="input_parent_id">
+<hr>
 
-    <button>I'm his/her parent!</button>
-  </form>
-  <% end %>
+<% if @user.is_parent == FALSE %>
+  <h2>Comments</h2>
+  <table>
+    <tr>
+      <th>Commenter</th>
+      <th>Comment</th>
+      <th>Posted</th>
+    </tr>
+
+    <% @own_comments.each do |a_comment| %>
+    <tr>
+      <td><%= a_comment.commenter.user_name %></td>
+      <td><%= a_comment.body %></td>
+      <td><%= a_comment.created_at %></td>
+    </tr>
+    <% end %>
+  </table>
 <% end %>
 
 <% if @current_user.id == @user.id %>
@@ -82,3 +110,4 @@
     <button>Delete my user account!</button>
   </form>
 <% end %>
+

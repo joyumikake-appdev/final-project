@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     the_username = params.fetch("detail_username")
     @user = User.where({ :user_name => the_username}).at(0)
     @own_studies = @user.own_studies
+    @own_comments = @user.own_comments
     the_kid_id = Parenting.where({ :parent_id => @user.id}).pluck(:kid_id)
     @kids = User.where({ :id => the_kid_id})
     render ({ :template => "users/user_details.html.erb"})
@@ -58,6 +59,10 @@ class UsersController < ApplicationController
     else
       render({ :template => "users/edit_profile_with_errors.html.erb" })
     end
+  end
+
+  def cancel
+    render({ :template => "user_sessions/cancel_account.html.erb"})
   end
 
   def destroy

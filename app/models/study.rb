@@ -19,6 +19,18 @@
 #
 
 class Study < ApplicationRecord
+  belongs_to :user
+  has_many :messages, :class_name => "Comment", :dependent => :destroy
+
+  validates :day, :presence => true
+  validates :english, :presence => true
+  validates :japanese, :presence => true
+  validates :math, :presence => true
+  validates :other_study, :presence => true
+  validates :science, :presence => true
+  validates :social_study, :presence => true
+  validates :game, :presence => true
+  
   def learner
     return User.where({ :id => self.user_id }).at(0)
   end

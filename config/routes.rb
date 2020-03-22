@@ -28,8 +28,11 @@ Rails.application.routes.draw do
   # UPDATE RECORD
   post("/modify_user", { :controller => "users", :action => "update" })
   
+  # DELETE FORM
+  get("/cancel_user_account", { :controller => "users", :action => "cancel" })
+
   # DELETE RECORD
-  get("/cancel_user_account", { :controller => "users", :action => "destroy" })
+  get("/destory_user_account", { :controller => "users", :action => "destroy" })
 
   # ------------------------------
 

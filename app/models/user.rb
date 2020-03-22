@@ -25,6 +25,12 @@ class User < ApplicationRecord
   end
 
   def points
-    return Study.where({:user_id => self.id }).sum("point")
+    return Study.where({ :user_id => self.id }).sum("point")
   end
+
+  def own_comments
+    the_studies = Study.where({ :user_id => self.id }).pluck(:id)
+    return Comment.where({ :study_id => the_studies})
+  end
+
 end
